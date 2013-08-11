@@ -473,7 +473,8 @@ TorrentRendererCompactDetailed.prototype =
 		// up and down speed
 		e = root._speed_details;
 		setTextContent(e, this.getSpeedDetails(t));
-		if (t.getUploadSpeed() + t.getDownloadSpeed() > 0) e.className = 'torrent_speed_details active';
+		e.className = 'torrent_speed_details';
+		if (t.getUploadSpeed() > 0 || (t.isDownloading() && t.getDownloadSpeed() > 0)) e.className += ' active';
 	}
 };
 
