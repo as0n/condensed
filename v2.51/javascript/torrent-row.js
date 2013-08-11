@@ -90,12 +90,12 @@ TorrentRendererHelper.renderProgressbar = function(controller, t, progressbar)
 
 TorrentRendererHelper.formatUL = function(t)
 {
-	return '&uarr; ' + Transmission.fmt.speedBps(t.getUploadSpeed());
+	return '↑ ' + Transmission.fmt.speedBps(t.getUploadSpeed());
 };
 
 TorrentRendererHelper.formatDL = function(t)
 {
-	return '&darr; ' + Transmission.fmt.speedBps(t.getDownloadSpeed());
+	return '↓ ' + Transmission.fmt.speedBps(t.getDownloadSpeed());
 };
 
 /****
@@ -384,7 +384,7 @@ TorrentRendererCondensed.prototype =
 		root.appendChild(detUploaded);
 		root.appendChild(detPeers);
 		root.appendChild(speed);
-		root.className = 'torrent compactDetailed';
+		root.className = 'torrent condensed';
 
 		root._pause_resume_button_image = image;
 		root._toggle_running_button = button;
