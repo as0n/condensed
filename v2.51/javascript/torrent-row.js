@@ -337,7 +337,7 @@ TorrentRendererCompact.prototype =
 *****
 ****/
 
-function TorrentRendererCompactDetailed()
+function TorrentRendererCondensed()
 {
 }
 TorrentRendererCompactDetailed.prototype =
