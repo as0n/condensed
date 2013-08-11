@@ -286,6 +286,50 @@ ul.torrent_list
 		&.even { background-color: #F7F7F7; }
 		&.selected { background-color: $selection-color; }
 		&.compact { div.torrent_name { color: black; } }
+		&.condensed {
+			font-family : Consolas, Arial;
+			font-size : 1.1em;
+			padding : 5px 15px;
+			
+			a {
+				display : inline-block;
+				float : none;
+				margin : 0 10px 0 0;
+				position : static;
+			}
+			div.torrent_name {
+				color: black;
+			  	display : inline-block;
+			  	margin : 0 10px 0 0;
+			  	width : 25%;
+			}
+			div.torrent_progress_bar_container {
+				display : inline-block;
+				position : relative;
+				margin : 0 10px 0 0;
+				right : 0;
+				width : 15%;
+			}
+			div.torrent_det {
+				display : inline-block;
+				margin-right : 10px;
+				min-width : 5%;
+				
+				em {
+					color : black;
+					font-style : normal;
+				}
+			}
+			div.torrent_speed_details {
+				display : inline-block;
+				float : right;
+				
+				&.active {
+					color : black;
+					font-weight: bold;
+				}
+			}
+		}
 
 		// start-stop button
 		a {
