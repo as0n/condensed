@@ -1094,7 +1094,7 @@ div#jqContextMenu
 	-webkit-user-select: none;
 
 	ul {
-		filter: alpha(opacity=98);
+		/*filter: alpha(opacity=98);*/
 		-moz-opacity: .98;
 		opacity: .98;
 		-webkit-box-shadow: 0 10px 25px rgba(0,0,0,0.4);
