@@ -337,6 +337,151 @@ TorrentRendererCompact.prototype =
 *****
 ****/
 
+function TorrentRendererCompactDetailed()
+{
+}
+TorrentRendererCompactDetailed.prototype =
+{
+	createRow: function()
+	{
+		var root, image, button, name, progressbar, details, peers;
+
+		root = document.createElement('li');
+
+		image = document.createElement('div');
+		button = document.createElement('a');
+		button.appendChild(image);
+
+		name = document.createElement('div');
+		name.className = 'torrent_name compact';
+
+		progressbar = TorrentRendererHelper.createProgressbar('');
+
+		detTotal = document.createElement('div');
+		detTotal.className = 'torrent_det';
+
+		detRatio = document.createElement('div');
+		detRatio.className = 'torrent_det';
+
+		detDownloaded = document.createElement('div');
+		detDownloaded.className = 'torrent_det';
+
+		detUploaded = document.createElement('div');
+		detUploaded.className = 'torrent_det';
+
+		detPeers = document.createElement('div');
+		detPeers.className = 'torrent_det';
+
+		speed = document.createElement('div');
+		speed.className = 'torrent_speed_details';
+
+		root.appendChild(button);
+		root.appendChild(name);
+		root.appendChild(progressbar.element);
+		root.appendChild(detTotal);
+		root.appendChild(detRatio);
+		root.appendChild(detDownloaded);
+		root.appendChild(detUploaded);
+		root.appendChild(detPeers);
+		root.appendChild(speed);
+		root.className = 'torrent compactDetailed';
+
+		root._pause_resume_button_image = image;
+		root._toggle_running_button = button;
+		root._name_container = name;
+		root._progressbar = progressbar;
+		root._det_total = detTotal;
+		root._det_ratio = detRatio;
+		root._det_downloaded = detDownloaded;
+		root._det_uploaded = detUploaded;
+		root._det_peers = detPeers;
+		root._speed_details = speed;
+		return root;
+	},
+
+	getPeerDetails: function(t)
+	{
+		var err;
+		if ((err = t.getErrorMessage()))
+			return err;
+
+		if (t.isDownloading())
+			return [ 'Downloading from',
+			         t.getPeersSendingToUs(),
+			         'of',
+			         t.getPeersConnected(),
+			         'peers' ].join(' ');
+
+		if (t.isSeeding())
+			return [ 'Seeding to',
+			         t.getPeersGettingFromUs(),
+			         'of',
+			         t.getPeersConnected(),
+			         'peers' ].join(' ');
+
+		if (t.isChecking())
+			return [ 'Verifying local data' ].join('');
+
+		return t.getStateString();
+	},
+
+	getSpeedDetails: function(t)
+	{
+		var err;
+		if ((err = t.getErrorMessage()))
+			return '';
+
+		if (t.isDownloading())
+			return [ TorrentRendererHelper.formatDL(t),
+			         TorrentRendererHelper.formatUL(t) ].join(' ');
+
+		if (t.isSeeding())
+			return [ TorrentRendererHelper.formatUL(t) ].join(' ');
+
+		if (t.isChecking())
+			return [ Transmission.fmt.percentString(100.0 * t.getRecheckProgress()),
+			         '%' ].join('');
+
+		return t.getStateString();
+	},
+
+	render: function(controller, t, root)
+	{
+		var e;
+
+		// pause/resume button
+		var is_stopped = t.isStopped();
+		e = root._pause_resume_button_image;
+		e.alt = is_stopped ? 'Resume' : 'Pause';
+		e.className = is_stopped ? 'torrent_resume' : 'torrent_pause';
+
+		// name
+		setTextContent(root._name_container, t.getName());
+
+		// progressbar
+		TorrentRendererHelper.renderProgressbar(controller, t, root._progressbar);
+
+		// progress details
+		root._det_total.innerHTML = '<em>T</em> '+Transmission.fmt.size(t.getTotalSize());
+		root._det_ratio.innerHTML = '<em>R</em> '+Transmission.fmt.ratioString(t.getUploadRatio());
+		root._det_downloaded.innerHTML = '<em>D</em> '+Transmission.fmt.size(t.getSizeWhenDone());
+		root._det_uploaded.innerHTML = '<em>U</em> '+Transmission.fmt.size(t.getUploadedEver());
+		
+		// peer details
+		setTextContent(root._det_peers, this.getPeerDetails(t));
+
+		// up and down speed
+		e = root._speed_details;
+		setTextContent(e, this.getSpeedDetails(t));
+		if (t.getUploadSpeed() + t.getDownloadSpeed() > 0) e.className = 'torrent_speed_details active';
+	}
+};
+
+/****
+*****
+*****
+****/
+
 function TorrentRow(view, controller, torrent)
 {
 	this.initialize(view, controller, torrent);
