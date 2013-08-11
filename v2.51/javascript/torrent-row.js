@@ -340,7 +340,7 @@ TorrentRendererCompact.prototype =
 function TorrentRendererCondensed()
 {
 }
-TorrentRendererCompactDetailed.prototype =
+TorrentRendererCondensed.prototype =
 {
 	createRow: function()
 	{
