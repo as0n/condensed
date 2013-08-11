@@ -1470,7 +1470,7 @@ Transmission.prototype =
 		$("#compact-button").toggleClass('selected',compact);
 
 		// update the ui: torrent list
-		this.torrentRenderer = compact ? new TorrentRendererCompact()
+		this.torrentRenderer = compact ? new TorrentRendererCondensed()
 		                               : new TorrentRendererFull();
 		this.refilter(true);
 	},
