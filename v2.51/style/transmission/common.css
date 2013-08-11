@@ -305,6 +305,47 @@ ul.torrent_list {
     ul.torrent_list div.torrent_progress_bar.incomplete.seeding {
       background-position: left -10px;
       border-color: #29AD35; }
+	ul.torrent_list li.torrent.compactDetailed {
+		font-family : Consolas, Arial;
+		font-size : 1.1em;
+		padding : 5px 15px;
+	}
+	ul.torrent_list li.torrent.compactDetailed a {
+		display : inline-block;
+		float : none;
+		margin : 0 10px 0 0;
+		position : static;
+	}
+	ul.torrent_list li.torrent.compactDetailed div.torrent_name {
+		color: black;
+	  	display : inline-block;
+	  	margin : 0 10px 0 0;
+	  	width : 25%;
+	}
+  	ul.torrent_list li.torrent.compactDetailed div.torrent_progress_bar_container {
+		display : inline-block;
+		position : relative;
+		margin : 0 10px 0 0;
+		right : 0;
+		width : 15%;
+	}
+	ul.torrent_list li.torrent.compactDetailed div.torrent_det {
+		display : inline-block;
+		margin-right : 10px;
+		min-width : 5%;
+	}
+	ul.torrent_list li.torrent.compactDetailed div.torrent_det em {
+		color : black;
+		font-style : normal;
+	}
+	ul.torrent_list li.torrent.compactDetailed div.torrent_speed_details {
+		display : inline-block;
+		float : right;
+	}
+	ul.torrent_list li.torrent.compactDetailed div.torrent_speed_details.active {
+		color : black;
+		font-weight: bold;
+	}
 
 /***
 ****
