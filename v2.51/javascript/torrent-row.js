@@ -356,7 +356,7 @@ TorrentRendererCondensed.prototype =
 		name.className = 'torrent_name compact';
 
 		progressbar = TorrentRendererHelper.createProgressbar('');
-
+		
 		detTotal = document.createElement('div');
 		detTotal.className = 'torrent_det';
 
@@ -468,7 +468,8 @@ TorrentRendererCondensed.prototype =
 		root._det_uploaded.innerHTML = '<em>U</em> '+Transmission.fmt.size(t.getUploadedEver());
 		
 		// peer details
-		setTextContent(root._det_peers, this.getPeerDetails(t));
+		var last = t.getLastActivity();
+		setTextContent(root._det_peers, (last ? Transmission.fmt.timeInterval(Date.now()/1000 - last)+' — ' : '')+this.getPeerDetails(t));
 
 		// up and down speed
 		e = root._speed_details;
